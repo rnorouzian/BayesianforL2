@@ -1,0 +1,11 @@
+Package: BayesianforL2
+Type: Package
+Title: Introduction to Bayesian Thinking for L2 Researchers
+Version: 0.1.0
+Author: Reza Norouzian <rnorouzian@gmail.com>
+Maintainer: Reza Norouzian <rnorouzian@gmail.com>
+Description: Bayesian tools for understanding Bayesian estimation in L2 research.
+License: GPL-3
+LazyData: TRUE
+RoxygenNote: 6.0.1
+Depends: plotrix, pracma, stats, utils, graphics, grDevices
