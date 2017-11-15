@@ -51,9 +51,8 @@ Post_Cohen_d = function(t, N1, N2 = NULL, tl = 2, ttype, dexp = 1, wid = "wi"){
 
   ## decimal display controller:
 
-  decimal <- function(x, k) { format(round(x, k),
-     nsmall = k, scientific = ifelse(x >= 1e+05 || x <= -1e+05 ||
-        x <= 1e-05 & x >= -1e-05, T, F) ) }
+  decimal <- function(x, k) { as.numeric(format(round(x, k), nsmall = k, scientific = 
+           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, T, F) )) }
 
 
   par(mgp=c(2.2, .75, 0), mar=c(6.1, 4.1, 5.1, 1.5) )
@@ -194,7 +193,7 @@ Post_Cohen_d = function(t, N1, N2 = NULL, tl = 2, ttype, dexp = 1, wid = "wi"){
   ######################
 
 
-  plot(ddd, post, ty="l", col="navyblue", xlab = expression(bold("Population Effect Size " (delta))),cex.lab=1.5,
+  plot(ddd, post, type="l", col="navyblue", xlab = expression(bold("Population Effect Size " (delta))),cex.lab=1.5,
        font.lab=2 ,las=1, ylab ="Density", lwd=3, bty="n", xlim=c(-6, 6), ylim = c(0, max(post)+(.4*max(post))),
        cex=2, font =2)
 
@@ -258,11 +257,11 @@ Post_Cohen_d = function(t, N1, N2 = NULL, tl = 2, ttype, dexp = 1, wid = "wi"){
   #############
 
 
-  if(tl== 2) {  curve(dcauchy(x, 0, rscale), -6, 6, add=T, lty=3, lwd=3, col="cyan2")  }
+  if(tl== 2) {  curve(dcauchy(x, 0, rscale), -6, 6, add=TRUE, lty=3, lwd=3, col="cyan2")  }
 
-  if(tl== 1 & dexp > 0) { curve(dcauchy(x, 0, rscale),  0, 6, add=T, lty=3, lwd=3, col="cyan2") }
+  if(tl== 1 & dexp > 0) { curve(dcauchy(x, 0, rscale),  0, 6, add=TRUE, lty=3, lwd=3, col="cyan2") }
 
-  if(tl== 1 & dexp < 0) { curve(dcauchy(x, 0, rscale), -6, 0 , add=T, lty=3, lwd=3,  col="cyan2") }
+  if(tl== 1 & dexp < 0) { curve(dcauchy(x, 0, rscale), -6, 0 , add=TRUE, lty=3, lwd=3,  col="cyan2") }
 
   if(tl== 1){ segments(0, 0, 0, ZERO.POINT.PRIOR, lwd=3, lty=3, col="cyan2" ) }
 
