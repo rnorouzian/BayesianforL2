@@ -79,7 +79,7 @@ Beta_ID = function(Low, High, Cover = NULL){
 
     par(family = 'serif')
 
-    plot(1, axes = F, ty = 'n', ann = F)
+    plot(1, axes = FALSE, type = 'n', ann = FALSE)
 
     text(1, 1, "Unable to find such a prior", cex = 3.5, col = 'red4', font = 2)
 
@@ -120,8 +120,8 @@ Beta_ID = function(Low, High, Cover = NULL){
         return(x)
       }
 
-      format(round(x, k), nsmall = k, scientific =
-               ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, T, F) )
+as.numeric(format(round(x, k), nsmall = k, scientific =
+           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, TRUE, FALSE) ))
     }
 
     #@@@@@@@ Get the shape parameters of a beta Dist. knowing its quantiles
@@ -167,19 +167,19 @@ Beta_ID = function(Low, High, Cover = NULL){
 
 
     curve( dbeta(x, parms[1], parms[2]), from = 0, to = 1, lwd = 4, n = 1e4,
-          ylab = 'Density', font.lab = 2, cex.lab = 1.3, bty = "n", xpd = T,
+          ylab = 'Density', font.lab = 2, cex.lab = 1.3, bty = "n", xpd = TRUE,
           xaxt = 'n', xlab = NA, las = 1, font.axis = 2, ylim = ylims, cex.axis = 1.2)
 
 
-    axis(1, at = round(seq(0, 1, len = 9), 2), font = 2, cex.axis = 1.3 )
+    axis(1, at = round(seq(0, 1, length.out = 9), 2), font = 2, cex.axis = 1.3 )
 
-    axis(1, at = round(seq(0, 1, len = 9), 2),
-         labels = paste(100* round(seq(0, 1, len = 9), 2),"%",sep=""),
+    axis(1, at = round(seq(0, 1, length.out = 9), 2),
+         labels = paste(100* round(seq(0, 1, length.out = 9), 2),"%", sep=""),
          pos = par("usr")[3] - 1 * 0.05 * (par("usr")[4] - par("usr")[3]),
          tick = FALSE, font = 2, cex.axis = 1.3 ) #2nd axis labels
 
 
-    segments(beta.mode, par('usr')[3], beta.mode, beta.peak ,lty = 3, xpd = T)
+    segments(beta.mode, par('usr')[3], beta.mode, beta.peak ,lty = 3, xpd = TRUE)
 
     arrows(quantiles[1], 0, quantiles[2], 0, code = 3, lwd = 2, lend = 1, angle = 90, length = .15, col = 'red')
 
@@ -228,4 +228,3 @@ Beta_ID = function(Low, High, Cover = NULL){
   }
 
 }
-
