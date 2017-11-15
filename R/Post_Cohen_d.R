@@ -52,7 +52,7 @@ Post_Cohen_d = function(t, N1, N2 = NULL, tl = 2, ttype, dexp = 1, wid = "wi"){
   ## decimal display controller:
 
   decimal <- function(x, k) { as.numeric(format(round(x, k), nsmall = k, scientific = 
-           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, T, F) )) }
+           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, TRUE, FALSE) )) }
 
 
   par(mgp=c(2.2, .75, 0), mar=c(6.1, 4.1, 5.1, 1.5) )
