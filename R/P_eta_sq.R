@@ -74,8 +74,8 @@ P_eta_sq = function(f, N, df1, df2, alpha, beta){
       return(x)
     }
 
-    format(round(x, k), nsmall = k, scientific =
-             ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, T, F) )
+    as.numeric(format(round(x, k), nsmall = k, scientific = 
+           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, T, F) ))
   }
 
 
