@@ -62,8 +62,8 @@ Eq_Testing = function(t, N1, N2 = NULL, wid = "wi", dL = -.1, dU = .1){
       return(x)
     }
 
-    format(round(x, k), nsmall = k, scientific =
-             ifelse(x >= 1e5 || x <= -1e5 || x <= 1e-5 & x >= -1e-5, T, F) )
+    as.numeric(format(round(x, k), nsmall = k, scientific = 
+           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, TRUE, FALSE) ))
   }
 
 
@@ -183,7 +183,7 @@ Eq_Testing = function(t, N1, N2 = NULL, wid = "wi", dL = -.1, dU = .1){
   ## plot the posterior:
 
   post.mode = optimize(function(delta) pdf.posterior(delta, t, N1, N2, rscale ),
-                       interval = c(x.min, x.max), maximum = T, tol = 1e-12)[[1]]
+                       interval = c(x.min, x.max), maximum = TRUE, tol = 1e-12)[[1]]
 
   post.peak = pdf.posterior(post.mode, t, N1, N2, rscale = rscale )
 
@@ -191,7 +191,7 @@ Eq_Testing = function(t, N1, N2 = NULL, wid = "wi", dL = -.1, dU = .1){
   par(family = 'serif', mar = c(.1, 4.1, 3.1, 2.1) )
 
 
-  cc = curve(pdf.posterior(x, t, N1, N2, rscale), from = x.min, to = x.max, ty="l",
+  cc = curve(pdf.posterior(x, t, N1, N2, rscale), from = x.min, to = x.max, type="l",
              col = "navy", xlab = NA, cex.lab=1.5, font.lab=2 ,las=1, ylab ="Density",
              bty = "n", xlim = c(x.min, x.max), ylim = c(0, post.peak+(.1*post.peak)),
              cex = 2, font = 2, xaxt = "n", mgp = c(2.3, .75, 0), n = 1e3 )
@@ -240,7 +240,7 @@ Eq_Testing = function(t, N1, N2 = NULL, wid = "wi", dL = -.1, dU = .1){
   segments( c(x1, x2), c(y1, y2), rep(x.text, 2), rep(y.text*1.023, 2), lwd = 2, col = 'magenta' )
 
 
-  text(x.text, y.text, "Practically Equivalent to ZERO", font = 2, pos = 3, col = 'darkgreen', cex = 1.1, xpd = T)
+  text(x.text, y.text, "Practically Equivalent to ZERO", font = 2, pos = 3, col = 'darkgreen', cex = 1.1, xpd = TRUE)
 
 
   points( c(dL, dU), c(y1, y2), pch = 21, col = 'green3', bg = 'green3', cex = 1.2 )
@@ -259,7 +259,7 @@ Eq_Testing = function(t, N1, N2 = NULL, wid = "wi", dL = -.1, dU = .1){
 
 
   legend("top", legend = c("There is", paste(BB,"%", sep=""), "probability that TRUE effect size is equivalent to ZERO"),
-         bty="n", inset = c(-1, -.2), text.font=2, cex = 1.2, xpd = T, ncol = 3, text.col = c(1, 'red', 1),
+         bty="n", inset = c(-1, -.2), text.font=2, cex = 1.2, xpd = TRUE, ncol = 3, text.col = c(1, 'red', 1),
          x.intersp = c(-44.5, -1.5, -16)	 )
 
 
@@ -295,8 +295,8 @@ Eq_Testing = function(t, N1, N2 = NULL, wid = "wi", dL = -.1, dU = .1){
   eq.upp = ifelse(abs(dL) <= .3, 4, 2)*(   ((dU - dL) / 2) )
 
 
-  L = seq(eq.low, 0, len = 1e2)
-  U = seq(eq.upp, 0, len = 1e2)
+  L = seq(eq.low, 0, length.out = 1e2)
+  U = seq(eq.upp, 0, length.out = 1e2)
 
 
   aa = sapply(L, function(delta) cdf.posterior(delta, t, N1, N2, rscale) )
@@ -307,25 +307,25 @@ Eq_Testing = function(t, N1, N2 = NULL, wid = "wi", dL = -.1, dU = .1){
   half = (U - L)/2
 
 
-  plot(half, Eq, ty = ifelse(abs(dL) == abs(dU), 'l' ,'n'), lwd = 3, col = 'red4', axes = F, font.axis = 2,
+  plot(half, Eq, type = ifelse(abs(dL) == abs(dU), 'l' ,'n'), lwd = 3, col = 'red4', axes = FALSE, font.axis = 2,
        xlab = NA, ylab = paste("%",'Posterior in ROPE', sep = ""), font.lab = 2, cex.lab = 1.15)
 
 
   mtext(side = 1, "Half of ROPE", font = 2, line = 1.5)
 
 
-  axis(1, at = decimal(seq(0, eq.upp[1], len = 7), 2), las = 1, font = 2)
-  axis(2, at = seq(0, Eq[1], len = 5),
-       labels = paste(100*round(seq(0, Eq[1], len = 5),
+  axis(1, at = decimal(seq(0, eq.upp[1], length.out = 7), 2), las = 1, font = 2)
+  axis(2, at = seq(0, Eq[1], length.out = 5),
+       labels = paste(100*round(seq(0, Eq[1], length.out = 5),
                                 2), "%", sep = ""), las = 1, font = 2)
 
 
-  par = par('usr')
+  u = par('usr')
 
-  rect(par[1], par[3], par[2], par[4], col = adjustcolor("grey", .1), border = NA )
+  rect(u[1], u[3], u[2], u[4], col = adjustcolor("grey", .1), border = NA )
 
 
-  rect(par[1], par[3], Post.in.ROPE.X, Post.in.ROPE.Y,
+  rect(u[1], u[3], Post.in.ROPE.X, Post.in.ROPE.Y,
        col = adjustcolor("yellow",
        alpha.f = ifelse(Post.in.ROPE.Y  <= .2, .1,
        ifelse(Post.in.ROPE.Y > .2 & Post.in.ROPE.Y <= .3, .15,
