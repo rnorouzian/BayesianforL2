@@ -73,17 +73,16 @@ Normal_ID = function(Low, High, Cover = NULL){
 
     if( equal(x, 0) ){ format( round(0, k), nsmall = k ) }else
 
-    { format(round(x, k), nsmall = k, scientific =
-               ifelse(x >= 1e5 || x <= -1e5 || x <= 1e-5 & x >= -1e-5, T, F) ) }
+    { as.numeric(format(round(x, k), nsmall = k, scientific =
+           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, TRUE, FALSE) )) }
   }
-
 
 
   if( p1 <= 0 || p2 >= 1 || q[1] >= q[2] || p1 >= p2 ) {
 
     par(family = 'serif')
 
-    plot(1, axes = F, ty = 'n', ann = F)
+    plot(1, axes = FALSE, type = 'n', ann = FALSE)
 
     text(1, 1, "Unable to find such a prior", cex = 3.5, col = 'red4', font = 2)
 
@@ -105,7 +104,7 @@ Normal_ID = function(Low, High, Cover = NULL){
     curve ( dnorm(x, mean, sd), lwd = 4, from = x.min,
             to = x.max, xlab = 'Parameter of Interest', ylab = 'Density',
             n = 1e4, xaxt = 'n', las = 1, font.lab = 2, cex.lab = 1.4,
-            frame.plot = F, font.axis = 2, cex.axis = 1.1)
+            frame.plot = FALSE, font.axis = 2, cex.axis = 1.1)
 
     prior.peak = dnorm(mean, mean, sd)
     low.exterme = par('usr')[3]
@@ -114,7 +113,7 @@ Normal_ID = function(Low, High, Cover = NULL){
     segments(mean, low.exterme, mean,
              prior.peak, lty = 3)
 
-    axis(1, at = decimal(seq(x.min, x.max, len = 9), 1), font = 2, cex.axis = 1.3 )
+    axis(1, at = decimal(seq(x.min, x.max, length.out = 9), 1), font = 2, cex.axis = 1.3 )
 
     arrows(q[1], 0, q[2], 0, lwd = 2, col = 'red', angle = 90, code = 3, length = .15)
 
@@ -143,6 +142,4 @@ Normal_ID = function(Low, High, Cover = NULL){
 
   }
 
-
 }
-
