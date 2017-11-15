@@ -70,7 +70,7 @@ Cauchy_ID = function (Low, High, Cover= NULL){
 
     par(family = 'serif')
 
-    plot(1, axes = F, ty = 'n', ann = F)
+    plot(1, axes = FALSE, type = 'n', ann = FALSE)
 
     text(1, 1, "Unable to find such a prior", cex = 3.5, col = 'red4', font = 2)
 
@@ -111,7 +111,7 @@ Cauchy_ID = function (Low, High, Cover= NULL){
 
     par(family = 'serif')
 
-    plot(1, axes = F, ty = 'n', ann = F)
+    plot(1, axes = FALSE, type = 'n', ann = FALSE)
 
     text(1, 1, "Unable to find such a prior", cex = 3.5, col = 'red4', font = 2)
 
@@ -131,8 +131,8 @@ Cauchy_ID = function (Low, High, Cover= NULL){
 
       if( equal(x, 0) ){ format( round(0, k), nsmall = k ) } else
 
-      { format(round(x, k), nsmall = k, scientific =
-                 ifelse(x >= 1e5 || x <= -1e5 || x <= 1e-5 & x >= -1e-5, T, F) ) }
+      { as.numeric(format(round(x, k), nsmall = k, scientific =
+           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, TRUE, FALSE) )) }
     }
 
 
@@ -151,7 +151,7 @@ Cauchy_ID = function (Low, High, Cover= NULL){
             frame.plot = F, font.axis = 2, cex.axis = 1.1 )
 
 
-    axis(1, at = decimal(seq(x.min, x.max, len = 9), 1), font = 2, cex.axis = 1.3 )
+    axis(1, at = decimal(seq(x.min, x.max, length.out = 9), 1), font = 2, cex.axis = 1.3 )
 
     low.extreme = par('usr')[3]
     prior.peak = dcauchy(mean, mean, sd)
@@ -162,7 +162,7 @@ Cauchy_ID = function (Low, High, Cover= NULL){
 
     arrows(q[1], 0, q[2], 0, lwd = 2, col = 'red', angle = 90, code = 3, length = .15)
 
-    text(c(q[1],q[2]), rep(0, 2), round(c(q[1], q[2]), 3), col = 'blue', pos = 3, font = 2, cex = 2, xpd = T)
+    text(c(q[1],q[2]), rep(0, 2), round(c(q[1], q[2]), 3), col = 'blue', pos = 3, font = 2, cex = 2, xpd = TRUE)
 
     mtext(side = 3, "This is the \"Cauchy Prior\" you have in mind", cex = 1.5, bty = 'n', font = 2)
     mtext(side = 3, bquote(bold(Mode == .(decimal (mean, 3)))), line = -4, cex = 1.8, adj = .05, col = 'red4')
@@ -175,8 +175,6 @@ Cauchy_ID = function (Low, High, Cover= NULL){
 
     setNames(c(decimal(parms[1], 7), decimal(parms[2], 7) ), c("Mode","Scale") )
 
-
   }
-
 
 }
