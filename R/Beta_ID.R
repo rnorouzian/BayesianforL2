@@ -220,8 +220,8 @@ as.numeric(format(round(x, k), nsmall = k, scientific =
       message("\nCAUTION: This prior generator uses an advanced problem solving technique  \n \t called \"Non-Linear Minimazation (nlm)\", when user defines impossible \n \t values a message will appear signaling the impossiblity to provide \n \t a solution.\n")
 
 
-      list(alpha = decimal(parms[1], 8), beta = decimal(parms[2], 8), Mean = decimal(beta.mean, 8),
-           Median = decimal(beta.med, 8), Mode = decimal(beta.mode, 8), SD = decimal(beta.sd, 8) )
+      structure(list(alpha = decimal(parms[1], 8), beta = decimal(parms[2], 8), Mean = decimal(beta.mean, 8),
+           Median = decimal(beta.med, 8), Mode = decimal(beta.mode, 8), SD = decimal(beta.sd, 8) ), class = "power.htest")
 
     }
 
