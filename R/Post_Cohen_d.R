@@ -210,13 +210,13 @@ Post_Cohen_d = function(t, N1, N2 = NULL, tl = 2, ttype, dexp = 1, wid = "wi"){
 
 
   arrows(ci[1], max(post)+.1*max(post), ci[2], max(post)+.1*max(post), col="red", length=.1, code = 3,
-         lwd=2, angle = 90,xpd=T)
+         lwd=2, angle = 90, xpd=TRUE)
 
 
   legend("topright",c("Prior","Posterior"), lty=c(3, 1), lwd=c(3, 3), col=c("cyan2","navyblue"),
          cex=1.3, inset=c(.01,.08), text.font = 2, box.col = "red4" )
 
-  par(family="serif", xpd = T)
+  par(family="serif", xpd = TRUE)
 
 
   legend("top", legend=paste("95% CI: [",decimal(ci[1], 4), ", ", decimal(ci[2], 4),"]"),
@@ -239,17 +239,17 @@ Post_Cohen_d = function(t, N1, N2 = NULL, tl = 2, ttype, dexp = 1, wid = "wi"){
          bty="n", inset=c(0, -.02), text.font=2, cex = 1.5)
 
 
-  par(family="sans", xpd = F)
+  par(family="sans", xpd = FALSE)
 
 
   if(tl==1){ segments(ifelse(dexp==1, -6, 6), 0, 0, 0, lwd=3, col="navyblue");
     segments(0, 0, 0, Points$post[Points$ddd==0], lwd=3 , col="navyblue") }
 
-  segments(modd, par("usr")[3], modd, max(post), xpd=T, col="navyblue", lty=3 )
+  segments(modd, par("usr")[3], modd, max(post), xpd=TRUE, col="navyblue", lty=3 )
 
-  segments(ifelse(0 > modd, 1, -1), ZERO.POINT.PRIOR, ifelse(0 > modd, 1, -1), ZERO.POINT.POST, xpd=T, col="magenta", lty=2 )
+  segments(ifelse(0 > modd, 1, -1), ZERO.POINT.PRIOR, ifelse(0 > modd, 1, -1), ZERO.POINT.POST, xpd=TRUE, col="magenta", lty=2 )
 
-  segments(rep(ifelse(0 > modd, 1, -1), 2), c(ZERO.POINT.PRIOR, ZERO.POINT.POST), rep(0, 2), c(ZERO.POINT.PRIOR, ZERO.POINT.POST), xpd=T, col="magenta", lty=2)
+  segments(rep(ifelse(0 > modd, 1, -1), 2), c(ZERO.POINT.PRIOR, ZERO.POINT.POST), rep(0, 2), c(ZERO.POINT.PRIOR, ZERO.POINT.POST), xpd=TRUE, col="magenta", lty=2)
 
 
   #############
@@ -309,7 +309,7 @@ Post_Cohen_d = function(t, N1, N2 = NULL, tl = 2, ttype, dexp = 1, wid = "wi"){
                               .(ifelse(tl == 1, " \u00D7 2", "")),
                               " = ",
                               .(ifelse(tl == 1, txtt(G1/G2 * 2), txtt(G1/G2 ))), sep = "")),
-                 col = "red4", cex = 1.4, xpd=T)
+                 col = "red4", cex = 1.4, xpd=TRUE)
 
 
   if(tl==1) text(ifelse(0 > modd, 2.5, -2.5), (G1 + G2)/2,
@@ -317,7 +317,7 @@ Post_Cohen_d = function(t, N1, N2 = NULL, tl = 2, ttype, dexp = 1, wid = "wi"){
                               .(ifelse(tl == 1, " \u00D7 2", "")),
                               " = ",
                               .(ifelse(tl == 1, txtt(G1/G2 * 2), txtt(G1/G2 ))), sep = "")),
-                 col = "red4", cex = 1.4, xpd=T)
+                 col = "red4", cex = 1.4, xpd=TRUE)
 
 
 }
