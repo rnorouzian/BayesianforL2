@@ -9,7 +9,7 @@
 #'
 #' @return Provides graphical as well as full textual description of a suitable Beta
 #'         distribution for researcers based on their knowledge about how High or Low
-#'         the parameter has been found in the liliter?ature. Also, helps researcher
+#'         the parameter has been found in the literature. Also, helps researcher
 #'         to revise their prior by issuing various messages.
 #'
 #' @details Uses non-linear minimization to provide an optimal Beta prior distribution.
@@ -213,7 +213,7 @@ as.numeric(format(round(x, k), nsmall = k, scientific =
 
     {
 
-      message("\nNOTE 1: If you don't specify the coverage for your prvided values, we pick\n \t a 95% coverage for you.")
+      message("\nNOTE 1: If you don't specify the coverage for your provided values, we pick\n \t a 95% coverage for you.")
 
       message("\nNOTE 2: \"ALWAYS\" visually inspect the shape of the prior generated to see\n \tif it accurately represents your belief and revise if necessary.\n")
 
