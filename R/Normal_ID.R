@@ -138,7 +138,7 @@ Normal_ID = function(Low, High, Cover = NULL){
 
   { message("\nCAUTION: \"ALWAYS\" visually inspect the shape of the prior generated to see \n \t  if it accurately represents your belief and revise if necessary.\n")
 
-    setNames( c(decimal(mean, 7), decimal(sd, 7) ), c("mu","sigma"))
+   structure(list(Mu = decimal(mean, 7), Sigma = decimal(sd, 7)), class = "power.htest")
 
   }
 
