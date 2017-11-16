@@ -207,6 +207,6 @@ P_eta_sq = function(f, N, df1, df2, alpha, beta){
   names(vec) <- c('prior.mode', 'post.mode', 'Lower.CI', 'Upper.CI' , 'obs.petasq.umvue',
                   'obs.petasq.minMSE', 'obs.petasq.Cohen', 'post.mean', 'post.sd' )
 
-  lapply(vec, function(x) decimal(x, 7) )
-
+ b = lapply(vec, function(x) decimal(x, 7) )
+ structure((b), class = "power.htest")           
 }
