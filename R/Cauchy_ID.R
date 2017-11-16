@@ -148,7 +148,7 @@ Cauchy_ID = function (Low, High, Cover= NULL){
     curve ( dcauchy(x, mean, sd), lwd = 4, from = x.min,
             to = x.max, xlab = 'Parameter of Interest', ylab = 'Density',
             n = 1e4, xaxt = 'n', las = 1, font.lab = 2, cex.lab = 1.4,
-            frame.plot = F, font.axis = 2, cex.axis = 1.1 )
+            frame.plot = FALSE, font.axis = 2, cex.axis = 1.1 )
 
 
     axis(1, at = decimal(seq(x.min, x.max, length.out = 9), 1), font = 2, cex.axis = 1.3 )
@@ -172,8 +172,8 @@ Cauchy_ID = function (Low, High, Cover= NULL){
     cat(message("\nNOTE: \"Cauchy\" is like a NORMAL distribution but has VERY VERY EXTENDED tails.\n\tThus, using a coverage of \"90%\" for the low and high values is enough .\n"))
 
     if (all.equal(mean, 0, tol = 1e-4)) { text(mean, prior.peak / 3, "Neutral Position", cex = 1.5, pos = 3, srt = 90, font = 2) }
-
-    setNames(c(decimal(parms[1], 7), decimal(parms[2], 7) ), c("Mode","Scale") )
+    
+    structure(list(Mode = decimal(parms[1], 7), Scale = decimal(parms[2], 7)), class = "power.htest")
 
   }
 
