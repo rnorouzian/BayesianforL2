@@ -75,12 +75,12 @@ P_eta_sq = function(f, N, df1, df2, alpha, beta){
     }
 
     as.numeric(format(round(x, k), nsmall = k, scientific = 
-           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, T, F) ))
+           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, TRUE, FALSE) ))
   }
 
 
   ## Possible range that P.eta.Sq. can take:
-  petasq  <- seq(0, 1, len = 1e+4)
+  petasq  <- seq(0, 1, length.out = 1e4)
 
 
   ## 3 different definitions of "ncp" for F-dist. in the Math Stats Literature (JOHNSON, KOTZ[1994, VOL.2, P. 495]):
@@ -113,7 +113,7 @@ P_eta_sq = function(f, N, df1, df2, alpha, beta){
        las = 1, cex.lab = 1.3, cex.sub = 1.3, xaxs = "i", bty = 'n', cex.axis = 1.2
        , xaxt = "n", ylim = ylim )
 
-  axis(1, at = decimal(seq(0, 1, len = 7), 2 ), font.axis = 2, cex.axis = 1.3 )
+  axis(1, at = decimal(seq(0, 1, length.out = 7), 2 ), font.axis = 2, cex.axis = 1.3 )
 
 
   legend("topright", c("Beta Prior", "Posterior"), lty = c(3, 1),
@@ -123,7 +123,7 @@ P_eta_sq = function(f, N, df1, df2, alpha, beta){
 
   ## Plot of prior:
   Prior = curve( dbeta(x, alpha, beta),
-                 add = T, col = "green4", lty = 3, lwd = 3, from = 0, to = 1)
+                 add = TRUE, col = "green4", lty = 3, lwd = 3, from = 0, to = 1)
 
   prior.mode = (alpha - 1) / ( alpha + beta - 2 )
 
@@ -131,7 +131,7 @@ P_eta_sq = function(f, N, df1, df2, alpha, beta){
 
 
   #posterior mode
-  post.mode = optimize(function(petasq) posterior(f,N,df1,df2,petasq,alpha,beta),interval=c(0,1),maximum = T, tol=1e-10)[[1]]
+  post.mode = optimize(function(petasq) posterior(f,N,df1,df2,petasq,alpha,beta),interval=c(0,1),maximum = TRUE, tol=1e-12)[[1]]
 
   #posterior mean
   post.mean = integrate(function(petasq) petasq* posterior(f,N,df1,df2,petasq,alpha,beta), 0, 1)[[1]]
@@ -150,13 +150,13 @@ P_eta_sq = function(f, N, df1, df2, alpha, beta){
 
   ## line segments indicating the mode:
 
-  segments(post.mode, low.extreme, post.mode, post.peak, lty = 3, col = "gray20", xpd = T)
+  segments(post.mode, low.extreme, post.mode, post.peak, lty = 3, col = "gray20", xpd = TRUE)
 
 
   ## Texts on the line segments:
   text(prior.mode, prior.peak, bquote(bold("Prior")), col = "green4", pos = 3, cex = 1.2)
 
-  text(post.mode, post.peak, bquote(bold("Posterior")), pos = 3, cex = 1.2, xpd = T)
+  text(post.mode, post.peak, bquote(bold("Posterior")), pos = 3, cex = 1.2, xpd = TRUE)
 
   text(post.mode, post.peak/ 1.5, bquote(bold("Posterior Mode")), srt = 90, col = "gray40", pos = 3, cex = 1.2)
 
