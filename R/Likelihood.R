@@ -30,8 +30,8 @@ Likelihood = function (n){
 
   decimal <- function(x, k){
 
-    format(round(x, k), nsmall = k, scientific =
-             ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, T, F) )
+    as.numeric(format(round(x, k), nsmall = k, scientific = 
+           ifelse(x >= 1e+05 || x <= -1e+05 || x <= 1e-05 & x >= -1e-05, TRUE, FALSE) ))
   }
 
 
@@ -54,7 +54,7 @@ Likelihood = function (n){
 
   Like.function = curve( Likelihood, ylab =  bquote(bolditalic('Likelihood'~(mu))),
                          from = x.left, to = x.right, lwd = 3
-                         ,axes = F, xlab = NA,n = 1e4, bty = 'n', cex.lab = 1.3)$y
+                         ,axes = FALSE, xlab = NA,n = 1e4, bty = 'n', cex.lab = 1.3)$y
 
 
   axis(side = 1, at = decimal( seq(x.left, x.right, len = 8), 1), cex.axis = 1, font = 2 )
@@ -76,24 +76,24 @@ Likelihood = function (n){
   segments(like.mode, low.extreme, like.mode, like.peak, lty = 3 )
 
 
-  points( observations, rep(low.extreme, n), pch = 20, cex = 2, xpd = T, col = rgb(0, 0, 1, .8))
+  points( observations, rep(low.extreme, n), pch = 20, cex = 2, xpd = TRUE, col = rgb(0, 0, 1, .8))
 
   index = 1:n
 
   text(observations, rep(low.extreme, n), paste("Data ", index, sep = ""),
-       col = rgb(1, 0, 0, .9), font = 2, pos = 3, xpd = T, cex = .85 )
+       col = rgb(1, 0, 0, .9), font = 2, pos = 3, xpd = TRUE, cex = .85 )
 
   text(like.mode, like.peak/2.5, "Observed Estimate", col = 'gray50', font = 2,
        cex = .85, pos = 3, srt = 90)
 
-  points(like.mode, low.extreme, pch = 22, bg = rgb(0, 1, 0, .7), col = NA, cex = 1.8, xpd = T)
+  points(like.mode, low.extreme, pch = 22, bg = rgb(0, 1, 0, .7), col = NA, cex = 1.8, xpd = TRUE)
 
   legend('topleft', legend = "Actually Collected Data", pch = 20, col = rgb(0, 0, 1, .8), text.font = 2,
-         text.col = 'red', pt.cex = 1.6, bty = 'n', inset = c (-.03, .001), xpd = T, cex = .85,
+         text.col = 'red', pt.cex = 1.6, bty = 'n', inset = c (-.03, .001), xpd = TRUE, cex = .85,
          y.intersp = 0)
 
   legend('topright', legend = 'Observed Estimate (Mean)', pch = 15, col = rgb(0, 1, 0, .9), text.font = 2,
-         text.col = 'red', pt.cex = 1.3, bty = 'n', inset = c (-.03, .001), xpd = T, cex = .85,
+         text.col = 'red', pt.cex = 1.3, bty = 'n', inset = c (-.03, .001), xpd = TRUE, cex = .85,
          y.intersp = 0)
 
   mtext(side = 3, "Method of Maximum Likelihood", cex = 2, font = 2, line = .5)
