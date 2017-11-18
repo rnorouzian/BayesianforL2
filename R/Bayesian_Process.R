@@ -35,7 +35,7 @@ Bayesian_Process = function(d, N1, N2 = NULL) {
   curve(dnorm(x), -3, 3, n = 1e3, lwd = 3,
         ylab = NA, main = bquote(bolditalic('Prior'~(delta))),
         xlab = bquote(bolditalic(delta)),
-        font = 2, cex = 1.2, cex.sub = 1.2, cex.lab = 1.2, axes = F)
+        font = 2, cex = 1.2, cex.sub = 1.2, cex.lab = 1.2, axes = FALSE)
 
   axis(1, cex.axis = 1.2, font = 2)
 
@@ -60,10 +60,10 @@ Bayesian_Process = function(d, N1, N2 = NULL) {
                       col = 'red4', lwd = 3, from = -3, to = 3, n = 1e3,
                       ylab = NA, main = bquote(bolditalic('Likelihood'~(delta))),
                       xlab = bquote(bolditalic(delta)),
-                      font = 2, cex.lab = 1.2, axes = F)$y
+                      font = 2, cex.lab = 1.2, axes = FALSE)$y
 
 
-  Like.mode = optimize(function(x) dt(t, df, ncp = x*sqrt(efN) ), interval = c(-3, 3), maximum = T, tol = 1e-10)[[1]]
+  Like.mode = optimize(function(x) dt(t, df, ncp = x*sqrt(efN) ), interval = c(-3, 3), maximum = TRUE, tol = 1e-10)[[1]]
 
 
   axis(1, at = round(seq(-3, 3, len = 7), 2 ), cex.axis = 1.2, font = 2 )
@@ -99,15 +99,15 @@ Bayesian_Process = function(d, N1, N2 = NULL) {
   post = curve( posterior(t, N1, N2, x), -3, 3, lwd = 3, col = 'blue',
                 n = 1e3, ylab = NA, main = bquote(bolditalic('Posterior'~(delta))),
                 xlab = bquote(bolditalic(delta)),
-                font = 2, cex.lab = 1.2, axes = F)$y
+                font = 2, cex.lab = 1.2, axes = FALSE)$y
 
-  axis(1, at = seq(-3, 3, by =1 ), cex.axis = 1.2, font = 2, xpd = T)
+  axis(1, at = seq(-3, 3, by =1 ), cex.axis = 1.2, font = 2, xpd = TRUE)
 
   low.exterme = par('usr')[3]
 
 
   #posterior mode
-  post.mode = optimize(function(delta) posterior(t, N1, N2, delta),interval=c(-3,3),maximum = T, tol = 1e-10)[[1]]
+  post.mode = optimize(function(delta) posterior(t, N1, N2, delta),interval=c(-3,3),maximum = TRUE, tol = 1e-10)[[1]]
 
   post.peak = posterior(t, N1, N2, post.mode)
 
@@ -116,7 +116,7 @@ Bayesian_Process = function(d, N1, N2 = NULL) {
   text(post.mode, post.peak/4.3, bquote(bold("Posterior Mode"~ (delta))), srt = 90, pos = 3,
        cex = 1.3, font = 2)
 
-  mtext(side = 3, " \u00D7 ", line = 15, col= 'navy', cex = 6, font = 2,xpd = T)
+  mtext(side = 3, " \u00D7 ", line = 15, col= 'navy', cex = 6, font = 2,xpd = TRUE)
 
 
   arrows(0, 1.8*post.peak, 0, 1.25*post.peak, xpd = NA,    ## NA for xpd is a MUST
