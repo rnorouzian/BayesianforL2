@@ -129,11 +129,11 @@ Prior_Anatomy = function(type, half, width){
 
   BB = BB + Raise_curve #Raise BB
 
-  plot(1, type = 'n', ann = F,
+  plot(1, type = 'n', ann = FALSE,
        xlim = c(min(el_x - el_a), max(el_x + el_a)),
        ylim = c(min(el_y - el_b), max(BB)), axes = FALSE)
 
-  axis(side = 2, at = decimal( seq(0, max(BB), len = 4), 2), cex.axis = 1, font.axis = 2, las = 1 )
+  axis(side = 2, at = decimal( seq(0, max(BB), length.out = 4), 2), cex.axis = 1, font.axis = 2, las = 1 )
 
   # mtext("Density", side = 2, font = 2, cex = 1.6, line = 2)
   draw.ellipse(x = rep(el_x, n), y = rep(el_y, n),
@@ -163,7 +163,7 @@ Prior_Anatomy = function(type, half, width){
 
   #print(BB)
   #print(decimal(BB, 2))
-  text(AA, BB, labels = decimal(BB, 2), font = 2, cex = text_cex, col = 1, pos = 3, xpd = T )
+  text(AA, BB, labels = decimal(BB, 2), font = 2, cex = text_cex, col = 1, pos = 3, xpd = TRUE )
 
   points(AA, BB, pch = 21, col = curve_points_col, bg = curve_points_bg, cex = 1)
 
@@ -185,11 +185,11 @@ Prior_Anatomy = function(type, half, width){
   points( .3, (BB[7]+BB[8])/2.3, pch = 21, bg = 1, cex = 1.1, lwd = 2 )
 
   text( 3.45, (BB[7]+BB[8])/1.55, "Concentration of Plausible
-        Effect Sizes in L2 Research", cex = 1.1, font = 2, xpd = T )
+        Effect Sizes in L2 Research", cex = 1.1, font = 2, xpd = TRUE )
 
   #text( 3.5, (BB[7]+BB[8])/1.7, "Effect Sizes in L2 Research", cex = 1.1, font = 2, xpd = T)
 
-  text(-7.5, max(BB)/2, bquote(bold(Density)), cex = 1.4, srt = 90, xpd = T )
+  text(-7.5, max(BB)/2, bquote(bold(Density)), cex = 1.4, srt = 90, xpd = TRUE )
   mtext(side = 1, "A Range of Reasonable Sizes for a Population Effect in L2 Research", cex = 1.3, font = 2)
   mtext(side = 1, "Informed by (Plonsky & Oswald, 2014)", cex = 1.3, font = 2, line = 1.1)
 
