@@ -183,7 +183,7 @@ as.numeric(format(round(x, k), nsmall = k, scientific =
 
     arrows(quantiles[1], 0, quantiles[2], 0, code = 3, lwd = 2, lend = 1, angle = 90, length = .15, col = 'red')
 
-    text(c(quantiles[1], quantiles[2]), rep(0, 2), decimal(c(quantiles[1], quantiles[2]), 3 ), cex = 2, pos = 3, col = 'blue', font = 2, xpd = T )
+    text(c(quantiles[1], quantiles[2]), rep(0, 2), decimal(c(quantiles[1], quantiles[2]), 3 ), cex = 2, pos = 3, col = 'blue', font = 2, xpd = TRUE)
 
 
     mtext(side = 1, 'Parameter of Interest', line = 4.5, font = 2, cex = 1.3)
